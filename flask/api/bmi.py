@@ -1,0 +1,3 @@
+# ken
+class BMI:
+    pass

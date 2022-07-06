@@ -1,0 +1,3 @@
+# ユタ
+class Character:
+    pass
