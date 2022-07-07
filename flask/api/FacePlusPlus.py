@@ -30,7 +30,6 @@ class Analyze:
                     }
                 }
         """
-        print(",".join(return_attributes))
         url = "https://api-us.faceplusplus.com/facepp/v3/detect"
         data = {'api_key': self.api_key,
                 'api_secret': self.api_secret,
