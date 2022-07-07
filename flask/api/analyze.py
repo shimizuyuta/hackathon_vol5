@@ -1,4 +1,4 @@
-from api.beauty import Beauty as BT
+from api.FacePlusPlus import Analyze as FA
 from api.bmi import BMI
 from api.character import Character as CC
 from concurrent.futures import ThreadPoolExecutor
@@ -55,13 +55,13 @@ class Analyze:
     def __beauty_analyze(self):
         """顔面偏差値の取得
         """
-        bt = BT()
-        beauty_data = bt.analyze(self.image_file)
-        if "error_message" in beauty_data:
+        fa = FA()
+        faces_data = fa.analyze(['beauty'], self.image_file)
+        if "error_message" in faces_data:
             self.error_messages.update(
-                {'beauty': beauty_data['error_message']})
+                {'beauty': faces_data['error_message']})
         else:
-            self.res.update(beauty_data)
+            self.res.update({'beauty': faces_data})
 
     def __bmi_analyze(self):
         # bmi = BMI()
