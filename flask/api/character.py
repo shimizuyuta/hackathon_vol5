@@ -7,8 +7,6 @@ class Character:
         face_data = fa.analyze(["emotion"], image_file)
         if "error_message" in face_data:
             return face_data
-        print(face_data)
-        print(face_data[0])
 
         d = face_data[0]["attributes"]["emotion"]
         self.emotion = max(d, key=d.get)
