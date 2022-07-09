@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 from api.analyze import Analyze as AL
 
-# load_dotenv()
+load_dotenv()
 app = Flask(__name__)
 app.config.from_envvar('FLASK_CONFIG_FILE')
 CORS(
