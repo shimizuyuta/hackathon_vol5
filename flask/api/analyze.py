@@ -62,7 +62,7 @@ class Analyze:
             self.error_messages.update(
                 {'beauty': faces_data['error_message']})
         else:
-            self.res.update({'beauty': faces_data})
+            self.res.update({'beauty': faces_data[0]['attributes']['beauty']})
 
     def __bmi_analyze(self):
         bmi = BMI()
