@@ -1,26 +1,26 @@
 import cv2
-import DeepFace
-import plt
+from deepface import DeepFace
+# from matplotlib import plt
 # ユタ
 
 
 class Character:
-    def analysis(self, img_file):
-        img = cv2.imread(img_file)
+    def analysis(self):
+        img = cv2.imread('flask/img.jpg')
 
-        plt.imshow(img[:, :, ::-1])
+        # plt.imshow(img[:, :, ::-1])
 
-        plt.show()
+        # plt.show()
 
         result = DeepFace.analyze(img, actions=['emotion'])
 
         self.emotion = result['dominant_emotion']
 
-        self.judge()
+        self.__judge()
 
         return self.character
 
-    def judge(self):
+    def __judge(self):
         if self.emotion == "angry":
             self.character = "怒りっぽい"
         elif self.emotion == "disgust":
@@ -36,7 +36,7 @@ class Character:
         elif self.emotion == "neutral":
             self.character = "何か秘めたものを感じる"
         else:
-            self.character = "error"
+            self.character = {"error_message": "Unknown Error."}
         return self
 
 # cc = Character()

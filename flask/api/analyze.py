@@ -74,11 +74,10 @@ class Analyze:
         pass
 
     def __character_analyze(self):
-        # cc = CC()
-        # character_data = cc.hoge()
-        # if "error_message" in character_data:
-        #     self.error_messages.update(
-        #         {'beauty': character_data['error_message']})
-        # else:
-        #     self.res.update(character_data)
-        pass
+        cc = CC()
+        character_data = cc.analysis()
+        if "error_message" in character_data:
+            self.error_messages.update(
+                {'character': character_data['error_message']})
+        else:
+            self.res.update({'character': character_data})
