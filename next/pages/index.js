@@ -1,6 +1,7 @@
 import React from 'react'
-import Loading from '../components/Loading'
 import WebcamCapture from '../components/WebcamCapture'
+import Loading from '../components/Loading'
+import Result from '../components/result'
 import style from '../styles/Index.module.css'
 //これがエラーの基っぽい
 // import video1 from '../public/movie.mp4'
@@ -9,16 +10,25 @@ import style from '../styles/Index.module.css'
 
 const index = () => {
   return (
+    <div>
+      <title>
+        Henkenizer
+      </title>
     <div className="main">
       <video autoPlay muted loop>         
         <source src="/movie.mp4" type="video/mp4"/>       
       </video>
+      {/* <div id="title">
+        <p>Henkenizer</p>
+      </div> */}
       <div className={style.content}>
         <p>気になるアノ人、ヘンケナイザーを通して見てみよう。</p>
         <WebcamCapture />
-        <Loading />
+        {/* <Loading /> */}
+        {/* <Result /> */}
       </div>
     </div>
+  </div>
   )
 }
 
