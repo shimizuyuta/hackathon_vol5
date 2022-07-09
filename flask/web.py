@@ -1,12 +1,8 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-<<<<<<< HEAD
 # from dotenv import load_dotenv
-=======
-from dotenv import load_dotenv
 from io import BytesIO
 from PIL import Image
->>>>>>> main
 
 from api.analyze import Analyze as AL
 
