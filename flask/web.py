@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 # from io import BytesIO
 # from PIL import Image
 
 from api.analyze import Analyze as AL
 
-# load_dotenv()
+load_dotenv()
 app = Flask(__name__)
 app.config.from_envvar('FLASK_CONFIG_FILE')
 CORS(
@@ -15,9 +15,9 @@ CORS(
 )
 
 
-@app.route("/")
+@app.route("/",methods=['POST'])
 def test():
-    return render_template('test.html')
+    return jsonify({'test':'Hello!!World!!'})
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
