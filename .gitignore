@@ -3,3 +3,4 @@ __pycache__
 *.log
 *.jpg
 .DS_Store
+models/
