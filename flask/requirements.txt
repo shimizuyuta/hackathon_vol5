@@ -6,4 +6,3 @@ python-dotenv
 requests
 deepface
 opencv-python
-matplotlib
