@@ -15,9 +15,9 @@ CORS(
 )
 
 
-@app.route("/",methods=['POST'])
+@app.route("/")
 def test():
-    return jsonify({'test':'Hello!!World!!'})
+    return render_template('test.html')
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
