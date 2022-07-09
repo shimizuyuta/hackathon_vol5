@@ -5,5 +5,4 @@ flask-cors
 python-dotenv
 requests
 deepface
-cv2
-matplotlib
+opencv-python
