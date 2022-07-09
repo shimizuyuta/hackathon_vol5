@@ -43,7 +43,8 @@ class Analyze:
 
         executor.submit(self.__beauty_analyze())
         executor.submit(self.__bmi_analyze())
-        # executor.submit(self.__character_analyze())
+        executor.submit(self.__character_analyze())
+
         executor.shutdown()
 
         # エラーメッセージが一つでもあれば， error_messages　を返す
@@ -73,11 +74,10 @@ class Analyze:
             self.res.update({"bmi": bmi_data})
 
     def __character_analyze(self):
-        # cc = CC()
-        # character_data = cc.hoge()
-        # if "error_message" in character_data:
-        #     self.error_messages.update(
-        #         {'beauty': character_data['error_message']})
-        # else:
-        #     self.res.update(character_data)
-        pass
+        cc = CC()
+        character_data = cc.analysis()
+        if "error_message" in character_data:
+            self.error_messages.update(
+                {'character': character_data['error_message']})
+        else:
+            self.res.update({'character': character_data})
