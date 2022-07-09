@@ -6,7 +6,7 @@ flask-cors
 requests
 deepface
 Pillow
-cmake
+# cmake
 wheel
 # dlib==19.24.0
 # numpy==1.21.6
