@@ -1,8 +1,12 @@
 # pip3 install -r requirements.txt で一括追加
+gunicorn
 flask
 flask-cors
 python-dotenv
 requests
+deepface
+cv2
+matplotlib
 Pillow
 cmake
 dlib==19.24.0
