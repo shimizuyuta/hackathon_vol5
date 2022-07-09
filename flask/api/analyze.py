@@ -43,7 +43,7 @@ class Analyze:
 
         executor.submit(self.__beauty_analyze())
         # executor.submit(self.__bmi_analyze())
-        executor.submit(self.__character_analyze())
+        # executor.submit(self.__character_analyze())
 
         executor.shutdown()
 
