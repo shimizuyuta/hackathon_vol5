@@ -1,6 +1,4 @@
-# 画像処理でいろんな情報わかっちゃうんだぞっ！！
+# Henkeniser(サーバーサイド)
+- リクエストされた画像に対して，顔面偏差値，BMI，性格を返す
 # versions
 - Python 3.10.4
-
-next.js
-https://hackathon-vol5-fyalsotaa-shimizuyuta.vercel.app/
