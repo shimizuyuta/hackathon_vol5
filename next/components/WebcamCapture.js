@@ -68,7 +68,7 @@ const WebcamCapture = () => {
       <Image src={url} alt='写真が表示されます' width="500px" height="300px" objectFit="contain" />
       {isCaptureable ?
       <>
-      <Stack spacing={2} direction="row" alignContent="center">
+      <Stack spacing={2} direction="row" aligncontent="center">
           <button 
             onClick={switchCamera} 
             className={style.button}
@@ -104,7 +104,7 @@ const WebcamCapture = () => {
         </Stack>
         </>:
         <>
-        <Stack spacing={2} direction="row" alignContents="center">
+        <Stack spacing={2} direction="row" aligncontents="center">
           <button onClick={startUpCamera} className={style.button}>Turn on Camera</button>
           {/* labelのところがなぜか動かない・TODO:buttonのところを調査 */}
           {/* <label htmlFor={inputId}>
