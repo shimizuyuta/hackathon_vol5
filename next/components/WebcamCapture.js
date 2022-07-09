@@ -7,7 +7,7 @@ import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-
+import axios from 'axios'
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
@@ -58,8 +58,37 @@ const WebcamCapture = () => {
   const handleImage = (e) => {
     const i = e.target.files[0]
     // ここqiitaにまとめる
-    const folderImg = URL.createObjectURL(i)
-    setUrl(folderImg)
+    // const folderImg = URL.createObjectURL(i)
+    // setUrl(folderImg)
+    setUrl(i)
+  }
+
+  const onSubmit = () => {
+    console.log(url,'Url*+*+++++')
+    const header = { headers: {
+      'Content-Type': 'multipart/form-data',
+      "Access-Control-Allow-Origin": "*",
+      }}
+      const data = new FormData() 
+      data.append('img_file', data)
+      const postImageUri = 'https://henkeniser.herokuapp.com/analyze'
+      console.log('url+++++',url)
+      console.log('url+++++',url[data])
+      console.log(data,'DDDDDDDDDDD')
+      // axios.post(postImageUri, data, header)
+      axios({
+        method: "POST",
+        url: postImageUri,
+        data: data,
+        // config: { headers: header }
+        headers: {"Content-Type": "multipart/form-data"},
+      })
+      .then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log('*********',err.message)
+      })
+      
   }
 
   return (
@@ -135,14 +164,14 @@ const WebcamCapture = () => {
               style={{ display: "none" }}
             />
           </label>
-          {/* <Button
+          <Button
               variant="contained"
               component="span"
               className={style.button}
-              onClick={this.onSubmit}
+              onClick={onSubmit}
           >
             ヘンケナイズする
-          </Button> */}
+          </Button>
         </Stack>
 
         </>
