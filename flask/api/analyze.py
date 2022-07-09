@@ -15,16 +15,16 @@ class Analyze:
             image_file (werkzeug.datastructures.FileStorage):
                 flask.request.files['file_name']の返り血
         """
-        self.image_file = image_file
         # エラーメッセージ
         self.error_messages = {}
         # レスポンスデータ
         self.res = {}
+        self.image_file = image_file
 
     def analyze(self):
         """データの解析
         Returns:
-            dict: 
+            dict:
             {
                 beauty:{
                     …
@@ -42,7 +42,7 @@ class Analyze:
         executor = ThreadPoolExecutor(max_workers=3)
 
         executor.submit(self.__beauty_analyze())
-        # executor.submit(self.__bmi_analyze())
+        executor.submit(self.__bmi_analyze())
         # executor.submit(self.__character_analyze())
         executor.shutdown()
 
@@ -64,14 +64,13 @@ class Analyze:
             self.res.update({'beauty': faces_data})
 
     def __bmi_analyze(self):
-        # bmi = BMI()
-        # bmi_data = bmi.hoge()
-        # if "error_message" in bmi_data:
-        #     self.error_messages.update(
-        #         {'bmi': bmi_data['error_message']})
-        # else:
-        #     self.res.update(bmi_data)
-        pass
+        bmi = BMI()
+        bmi_data = bmi.predict(self.image_file)
+        if "error_message" in bmi_data:
+            self.error_messages.update(
+                {'bmi': bmi_data['error_message']})
+        else:
+            self.res.update({"bmi": bmi_data})
 
     def __character_analyze(self):
         # cc = CC()
