@@ -65,19 +65,21 @@ class Analyze:
             self.res.update({'beauty': faces_data[0]['attributes']['beauty']})
 
     def __bmi_analyze(self):
-        bmi = BMI()
-        bmi_data = bmi.predict(self.image_file)
-        if "error_message" in bmi_data:
-            self.error_messages.update(
-                {'bmi': bmi_data['error_message']})
-        else:
-            self.res.update({"bmi": bmi_data})
+        # bmi = BMI()
+        # bmi_data = bmi.predict(self.image_file)
+        # if "error_message" in bmi_data:
+        #     self.error_messages.update(
+        #         {'bmi': bmi_data['error_message']})
+        # else:
+        #     self.res.update({"bmi": bmi_data})
+        pass
 
     def __character_analyze(self):
-        cc = CC()
-        character_data = cc.analysis()
-        if "error_message" in character_data:
-            self.error_messages.update(
-                {'character': character_data['error_message']})
-        else:
-            self.res.update({'character': character_data})
+        # cc = CC()
+        # character_data = cc.analysis()
+        # if "error_message" in character_data:
+        #     self.error_messages.update(
+        #         {'character': character_data['error_message']})
+        # else:
+        #     self.res.update({'character': character_data})
+        pass
