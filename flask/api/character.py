@@ -1,18 +1,23 @@
+import cv2
+import DeepFace
+import plt
 # ユタ
+
+
 class Character:
     def analysis(self, img_file):
         img = cv2.imread(img_file)
 
-        plt.imshow(img[:,:,::-1])
+        plt.imshow(img[:, :, ::-1])
 
         plt.show()
 
         result = DeepFace.analyze(img, actions=['emotion'])
-        
+
         self.emotion = result['dominant_emotion']
 
         self.judge()
-        
+
         return self.character
 
     def judge(self):
