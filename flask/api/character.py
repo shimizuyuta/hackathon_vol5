@@ -4,6 +4,7 @@
 
 
 class Character:
+    pass
     # def analysis(self):
     #     img = cv2.imread('flask/image.jpg')
     #     # plt.imshow(img[:, :, ::-1])
@@ -37,5 +38,5 @@ class Character:
     #         self.character = {"error_message": "Unknown Error."}
     #     return self
 
-# cc = Character()
-# cc.analysis(===image_file_path===)
+    # cc = Character()
+    # cc.analysis(===image_file_path===)
