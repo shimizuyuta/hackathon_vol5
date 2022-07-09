@@ -14,7 +14,7 @@ const index = () => {
         <source src="/movie.mp4" type="video/mp4"/>       
       </video>
       <div className={style.content}>
-        <p>偏見iser</p>
+        <p>気になるアノ人、ヘンケナイザーを通して見てみよう。</p>
         <WebcamCapture />
         <Loading />
       </div>

@@ -6,6 +6,7 @@ import style from '../styles/WebcamCapture.module.css'
 import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
@@ -64,13 +65,29 @@ const WebcamCapture = () => {
   return (
     <>
       {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
-      <Image src={url} alt='写真が表示されます' width="200px" height="100px" objectFit="contain" />
+      <Image src={url} alt='写真が表示されます' width="500px" height="300px" objectFit="contain" />
       {isCaptureable ?
-        <>
+      <>
+      <Stack spacing={2} direction="row" alignContent="center">
           <button 
-            onClick={switchCamera} className={style.button}><FlipCameraIosIcon/></button>
-          <button onClick={startUpCamera} className={style.button}>Turn off Camera</button>
-          <button onClick={captureCamera} className={style.button}>Capture Camera</button>
+            onClick={switchCamera} 
+            className={style.button}
+          >
+            <FlipCameraIosIcon/>
+          </button>
+          <button 
+            onClick={startUpCamera} 
+            className={style.button}
+          >
+            Turn off Camera
+          </button>
+          <button 
+            onClick={captureCamera} 
+            className={style.button}
+          >
+            Capture Camera
+          </button>
+        
           {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
           <Webcam
             audio={false}
@@ -84,8 +101,10 @@ const WebcamCapture = () => {
             }}
             ref={webcamRef}
           />
+        </Stack>
         </>:
         <>
+        <Stack spacing={2} direction="row" alignContents="center">
           <button onClick={startUpCamera} className={style.button}>Turn on Camera</button>
           {/* labelのところがなぜか動かない・TODO:buttonのところを調査 */}
           {/* <label htmlFor={inputId}>
@@ -104,8 +123,8 @@ const WebcamCapture = () => {
               variant="contained"
               component="span"
               className={style.button}
-            >
-              画像追加
+          >
+            画像追加
             </Button>
             <input
               id={inputId}
@@ -116,6 +135,7 @@ const WebcamCapture = () => {
               style={{ display: "none" }}
             />
           </label>
+        </Stack>
 
         </>
       }
