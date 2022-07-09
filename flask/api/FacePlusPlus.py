@@ -13,12 +13,12 @@ class Analyze:
         self.api_key = os.getenv('BEAUTY_API_KEY')
         self.api_secret = urllib.parse.quote(os.getenv('BEAUTY_SECRET_KEY'))
 
-    def analyze(self, return_attributes: list, image_file) -> dict:
+    def analyze(self, return_attributes: list, files) -> dict:
         """顔面の美しさを取得する
 
         Args:
-            image_file (werkzeug.datastructures.FileStorage):
-                flask.request.files['file_name']の返り血
+            image_file (werkzeug.datastructures.file_pathtorage):
+                flask.request.file_path['file_name']の返り血
 
         Returns:
             dict:
@@ -34,8 +34,6 @@ class Analyze:
         data = {'api_key': self.api_key,
                 'api_secret': self.api_secret,
                 'return_attributes': ",".join(return_attributes)}
-        files = {'image_file': (image_file.filename,
-                                image_file.read(), image_file.mimetype)}
 
         response = self.__request_api(url, data, files)
 
@@ -43,6 +41,8 @@ class Analyze:
             return {'error_message': response["error_message"]}
         if response['face_num'] <= 0:
             return {'error_message': "Face could not be detected"}
+        if response['face_num'] > 1:
+            return {'error_message': "Multiple face are detected"}
 
         return response['faces']
 

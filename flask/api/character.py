@@ -5,7 +5,7 @@ from deepface import DeepFace
 
 class Character:
     def analysis(self):
-        img = cv2.imread('flask/image.png')
+        img = cv2.imread('flask/image.jpg')
         # plt.imshow(img[:, :, ::-1])
 
         # plt.show()
