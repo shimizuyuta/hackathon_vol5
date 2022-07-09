@@ -2,11 +2,7 @@
 gunicorn
 flask
 flask-cors
-<<<<<<< HEAD
 # python-dotenv
-requests
-=======
-python-dotenv
 requests
 deepface
 Pillow
@@ -18,4 +14,3 @@ cmake
 face_recognition
 pycaret
 opencv-python
->>>>>>> main
