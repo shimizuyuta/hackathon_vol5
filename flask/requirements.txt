@@ -1,4 +1,4 @@
-# pip3 install -r requirements.txt で一括追加
+# pip install -r requirements.txt で一括追加
 gunicorn
 flask
 flask-cors
@@ -7,10 +7,10 @@ requests
 deepface
 Pillow
 cmake
-dlib==19.24.0
-numpy==1.21.6
-scipy==1.4.1
-pandas==1.3.5
+# dlib==19.24.0
+# numpy==1.21.6
+# scipy==1.4.1
+# pandas==1.3.5
 face_recognition
-pycaret==2.3.10
+pycaret
 opencv-python
