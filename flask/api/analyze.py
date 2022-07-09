@@ -16,7 +16,7 @@ class Analyze:
                 flask.request.files['file_name']の返り血
         """
         # エラーメッセージ
-        self.error_messages = {}
+        self.error_messages = []
         # レスポンスデータ
         self.res = {}
         self.image_file = image_file
@@ -57,12 +57,23 @@ class Analyze:
         """顔面偏差値の取得
         """
         fa = FA()
-        faces_data = fa.analyze(['beauty'], self.image_file)
-        if "error_message" in faces_data:
-            self.error_messages.update(
-                {'beauty': faces_data['error_message']})
+        face_data = fa.analyze(['beauty','emotion','gender','age'], self.image_file)
+        face_data_ = face_data[0]['attributes']
+        if "error_message" in face_data:
+            self.error_messages.append(
+                face_data['error_message'])
         else:
-            self.res.update({'beauty': faces_data[0]['attributes']['beauty']})
+            emotion = "";
+            pre = -1;
+            for k,v in face_data_['emotion'].items():
+                if pre < v:
+                    emotion = k
+                pre = v
+            character = self.return_character(emotion)
+            self.res.update({'character': character})
+            self.res.update({'beauty': face_data_['beauty']})
+            self.res.update({'age': face_data_['age']})
+            self.res.update({'gender': face_data_['gender']})
 
     def __bmi_analyze(self):
         # bmi = BMI()
@@ -83,3 +94,20 @@ class Analyze:
         # else:
         #     self.res.update({'character': character_data})
         pass
+    def return_character(self,emotion):
+        if emotion == "anger":
+            return "怒りっぽい"
+        elif emotion == "disgust":
+            return "神経質"
+        elif emotion == "fear":
+            return "心配性"
+        elif emotion == "happiness":
+            return "陽気"
+        elif emotion == "sadness":
+            return "悲観的"
+        elif emotion == "surprise":
+            return "繊細"
+        elif emotion == "neutral":
+            return "何か秘めたものを感じる"
+        else:
+            return {"error_message": "Unknown Error."}
