@@ -1,4 +1,7 @@
 html,
+head {
+  margin-left: 100px;
+}
 body {
   padding: 0;
   margin: 0;
@@ -14,3 +17,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#explain {
+  text-align: center;
+}
+
+/* button {
+  color: gray
+} */
