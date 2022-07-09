@@ -2,7 +2,7 @@
 gunicorn
 flask
 flask-cors
-# python-dotenv
+python-dotenv
 requests
 deepface
 Pillow
@@ -12,6 +12,6 @@ Pillow
 # numpy==1.21.6
 # scipy==1.4.1
 # pandas==1.3.5
-face_recognition
-pycaret
+# face_recognition
+# pycaret
 opencv-python
