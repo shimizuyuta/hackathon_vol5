@@ -1,6 +1,7 @@
 import face_recognition
 import os
-from pycaret.regression import *
+from pycaret.regression import load_model,predict_model
+import pandas as pd
 from api.FacePlusPlus import Analyze as FA
 
 

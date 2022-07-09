@@ -7,7 +7,7 @@ requests
 deepface
 Pillow
 # cmake
-wheel
+# wheel
 # dlib==19.24.0
 # numpy==1.21.6
 # scipy==1.4.1
