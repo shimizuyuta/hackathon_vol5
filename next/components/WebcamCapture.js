@@ -6,6 +6,7 @@ import style from '../styles/WebcamCapture.module.css'
 import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
@@ -64,29 +65,47 @@ const WebcamCapture = () => {
   return (
     <>
       {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
-      <Image src={url} alt='写真が表示されます' width="200px" height="100px" objectFit="contain" />
+      <Image src={url} alt='写真が表示されます' width="500px" height="300px" objectFit="contain" />
       {isCaptureable ?
-        <>
-          <button 
-            onClick={switchCamera} className={style.button}><FlipCameraIosIcon/></button>
-          <button onClick={startUpCamera} className={style.button}>Turn off Camera</button>
-          <button onClick={captureCamera} className={style.button}>Capture Camera</button>
-          {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
-          <Webcam
+      <>
+      <Webcam
             audio={false}
-            height={260}
-            width={340}
+            height="720px"
+            width="360px"
             screenshotFormat="image/jpeg"
             videoConstraints={{
-              ...videoConstraints,
-              facingMode
-              
+              width: 720,
+              height: 360,
+              facingMode: 'user'
             }}
             ref={webcamRef}
           />
+      <Stack spacing={2} direction="row" aligncontent="center">
+          <button 
+            onClick={switchCamera} 
+            className={style.button}
+          >
+            <FlipCameraIosIcon/>
+          </button>
+          <button 
+            onClick={startUpCamera} 
+            className={style.button}
+          >
+            カメラを閉じる
+          </button>
+          <button 
+            onClick={captureCamera} 
+            className={style.button}
+          >
+            撮影する
+          </button>
+        
+          {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
+        </Stack>
         </>:
         <>
-          <button onClick={startUpCamera} className={style.button}>Turn on Camera</button>
+        <Stack spacing={2} direction="row" aligncontents="center">
+          <button onClick={startUpCamera} className={style.button}>カメラを起動する</button>
           {/* labelのところがなぜか動かない・TODO:buttonのところを調査 */}
           {/* <label htmlFor={inputId}>
             <button  className={style.button} >open Folder</button>
@@ -104,8 +123,8 @@ const WebcamCapture = () => {
               variant="contained"
               component="span"
               className={style.button}
-            >
-              画像追加
+          >
+            画像を追加する
             </Button>
             <input
               id={inputId}
@@ -116,6 +135,15 @@ const WebcamCapture = () => {
               style={{ display: "none" }}
             />
           </label>
+          {/* <Button
+              variant="contained"
+              component="span"
+              className={style.button}
+              onClick={this.onSubmit}
+          >
+            ヘンケナイズする
+          </Button> */}
+        </Stack>
 
         </>
       }
