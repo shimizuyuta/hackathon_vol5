@@ -1,7 +1,7 @@
 import React from 'react'
 import WebcamCapture from '../components/WebcamCapture'
 import Loading from '../components/Loading'
-import Result from '../components/result'
+import Result from './result'
 import style from '../styles/Index.module.css'
 //これがエラーの基っぽい
 // import video1 from '../public/movie.mp4'
