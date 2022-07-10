@@ -12,7 +12,7 @@ const index = () => {
   return (
     <div>
       <title>
-        Henkenizer
+        Henkenyzer
       </title>
     <div className="main">
       <video autoPlay muted loop>         
