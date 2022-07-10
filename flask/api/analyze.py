@@ -86,36 +86,10 @@ class Analyze:
         pass
 
     def __character_analyze(self):
-<<<<<<< HEAD
-        # cc = CC()
-        # character_data = cc.analysis()
-        # if "error_message" in character_data:
-        #     self.error_messages.update(
-        #         {'character': character_data['error_message']})
-        # else:
-        #     self.res.update({'character': character_data})
-        pass
-    def return_character(self,emotion):
-        if emotion == "anger":
-            return "怒りっぽい"
-        elif emotion == "disgust":
-            return "神経質"
-        elif emotion == "fear":
-            return "心配性"
-        elif emotion == "happiness":
-            return "陽気"
-        elif emotion == "sadness":
-            return "悲観的"
-        elif emotion == "surprise":
-            return "繊細"
-        elif emotion == "neutral":
-            return "何か秘めたものを感じる"
-=======
         cc = CC()
         character_data = cc.analyze(self.image_file)
         if "error_message" in character_data:
             self.error_messages.update(
                 {'character': character_data['error_message']})
->>>>>>> main
         else:
             return {"error_message": "Unknown Error."}
