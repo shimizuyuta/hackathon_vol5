@@ -1,14 +1,14 @@
 import face_recognition
-import os
-from pycaret.regression import *
+import numpy as np
+import joblib
+from sklearn.linear_model import HuberRegressor
 from api.FacePlusPlus import Analyze as FA
 
 
 class BMI:
     def __init__(self):
-        print(os.getcwd())
-        self.weight_model = load_model("./flask/api/models/model_weight")
-        self.bmi_model = load_model("./flask/api/models/model_bmi")
+        self.weight_model = joblib.load("./flask/api/models/weight_predictor_light.model")
+        self.bmi_model = joblib.load("./flask/api/models/bmi_predictor_light.model")
 
     def predict(self, image_file):
         fa = FA()
@@ -25,14 +25,11 @@ class BMI:
         if not ret:
             return {'error_message': "Could not find a face in the image."}
 
-        df_face = pd.DataFrame([face_encoding])
-        df_prop = pd.DataFrame([[age, female, male]], columns=["old", "female", "male"])
-        df = pd.concat([df_prop, df_face], axis="columns")
+        data = [[age, female, male] + face_encoding]
 
-        weight = predict_model(self.weight_model, data=df)["Label"][0]
-        bmi = predict_model(self.bmi_model, data=df)["Label"][0]
+        weight = np.exp(self.weight_model.predict(data)).item()
+        bmi = np.exp(self.bmi_model.predict(data)).item()
         height = (weight / bmi) ** 0.5 * 100
-        print(f"height:{height:1}, weight:{weight:1}, bmi:{bmi:1}")
 
         return {"height": height, "weight": weight}
 
@@ -40,6 +37,5 @@ class BMI:
         picture_of_me = face_recognition.load_image_file(image_path)
         my_face_encoding = face_recognition.face_encodings(picture_of_me)
         if not my_face_encoding:
-            print(f"No face found in {image_path}")
             return False, None
         return True, my_face_encoding[0].tolist()
