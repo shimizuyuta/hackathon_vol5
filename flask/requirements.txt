@@ -10,4 +10,4 @@ dlib
 numpy
 face_recognition
 joblib
-# sklearn
+sklearn
