@@ -59,7 +59,7 @@ class Analyze:
         fa = FA()
         face_data = fa.analyze(['beauty','emotion','gender','age'], self.image_file)
         if "error_message" in face_data:
-            self.error_messages.upgrade({"beauty":face_data['error_message']})
+            self.error_messages.update({"beauty":face_data['error_message']})
         else:
             face_data_ = face_data[0]['attributes']
             self.res.update({'beauty': face_data_['beauty']})
