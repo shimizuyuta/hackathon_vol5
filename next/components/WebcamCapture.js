@@ -8,6 +8,10 @@ import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from 'axios'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
@@ -15,6 +19,7 @@ const FACING_MODE_ENVIRONMENT = "environment";
 //カメラのサイズ・キャプチャーサイズを変更する必要あり・該当部分3箇所(該当部分にコメントあり)
 //最初にエラーが出る　→　next-dev.js:29 Warning: Prop `id` did not match. Server: "0.8" Client: "0.47"
 //90行目
+
 
 
 //カメラのサイズ・キャプチャーサイズを変更する必要あり
@@ -73,6 +78,8 @@ const WebcamCapture = () => {
     setUrl(i)
   }
 
+  const [info, setInfo] = useState(null)
+
   const onSubmit = () => {
     console.log(url,'Url*+*+++++')
     const header = { headers: {
@@ -110,7 +117,9 @@ const WebcamCapture = () => {
       
     })
     .then(res => {
-      console.log(res)
+      setInfo(res.data)
+      console.log(res.data)
+      console.log(res.data.age)
     }).catch(err => {
       console.log('*********',err.message)
     })
@@ -199,6 +208,34 @@ const WebcamCapture = () => {
             ヘンケナイズする
           </Button>
         </Stack>
+
+        {/* <div>
+          {info.age} 
+        </div>
+        <div>
+          {info.bmi.height} 
+        </div>
+        <div>
+          {info.bmi.weight} 
+        </div> */}
+        
+        {/* <List>
+          <ListItem disablePadding>
+            <ListItemText primary="Age" secondary={info.age} />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemText primary="Beauty" secondary={info.age} />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemText primary="Height" secondary={info.bmi.height} />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemText primary="Weight" secondary={info.bmi.weight} />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemText primary="BMI" secondary={info.bmi} />
+          </ListItem>
+        </List> */}
 
         </>
       }
