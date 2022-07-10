@@ -10,12 +10,11 @@ const Result = () => {
 
     const [image, setImage] = useState()
     const router = useRouter();
-    const userData = router.query.input;
+    let userData = router.query.input;
     userData = JSON.parse(userData);
-
-    console.log(userData.age);
-    console.log(userData);
-    
+    // const userData = JSON.parse(router.query.input);
+    // console.log(typeof(userData))
+    console.log(userData,'fafaa')
 
     // useEffect(() => { 
     // console.log(query)
@@ -63,6 +62,14 @@ const Result = () => {
               <ListItemText primary="BMI" secondary={info.bmi} />
             </ListItem>
           </List> */}
+
+          <p>年齢：{userData.age}</p>
+          <p>顔面偏差値：{userData.beauty}</p>
+          <p>身長：{userData.bmi.height}</p>
+          <p>体重：{userData.bmi.weight}</p>
+          <p>性格：{userData.character}</p>
+          <p>性別：{userData.gender}</p>
+
         </div>
         
     )
