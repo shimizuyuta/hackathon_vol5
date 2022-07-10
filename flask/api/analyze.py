@@ -62,8 +62,12 @@ class Analyze:
             self.error_messages.update({"beauty":face_data['error_message']})
         else:
             face_data_ = face_data[0]['attributes']
-            self.res.update({'beauty': face_data_['beauty']})
-            self.res.update({'age': face_data_['age']['value']})
+            age = face_data_['age']['value']
+            self.res.update({'age': age})
+            if age == 'Male':
+                self.res.update({'beauty': face_data_['beauty']['male_score']})
+            else:
+                self.res.update({'beauty': face_data_['beauty']['female_score']})
             self.res.update({'gender': face_data_['gender']['value']})
 
     def __bmi_analyze(self):
