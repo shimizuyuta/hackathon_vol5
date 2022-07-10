@@ -1,4 +1,4 @@
-# Henkeniser
+# Henkenyzer
 # versions
 - Python 3.10.4
 

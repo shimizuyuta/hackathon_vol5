@@ -4,6 +4,7 @@ flask
 flask-cors
 # python-dotenv
 requests
+<<<<<<< HEAD
 # deepface
 # Pillow
 # cmake
@@ -15,3 +16,12 @@ requests
 # face_recognition
 # pycaret
 # opencv-python
+=======
+Pillow
+cmake
+dlib
+numpy
+face_recognition
+joblib
+sklearn
+>>>>>>> main

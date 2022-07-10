@@ -86,6 +86,7 @@ class Analyze:
         pass
 
     def __character_analyze(self):
+<<<<<<< HEAD
         # cc = CC()
         # character_data = cc.analysis()
         # if "error_message" in character_data:
@@ -109,5 +110,12 @@ class Analyze:
             return "繊細"
         elif emotion == "neutral":
             return "何か秘めたものを感じる"
+=======
+        cc = CC()
+        character_data = cc.analyze(self.image_file)
+        if "error_message" in character_data:
+            self.error_messages.update(
+                {'character': character_data['error_message']})
+>>>>>>> main
         else:
             return {"error_message": "Unknown Error."}
