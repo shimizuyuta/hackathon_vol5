@@ -75,7 +75,7 @@ class Analyze:
 
     def __character_analyze(self):
         cc = CC()
-        character_data = cc.analysis()
+        character_data = cc.analyze(self.image_file)
         if "error_message" in character_data:
             self.error_messages.update(
                 {'character': character_data['error_message']})
