@@ -1,7 +1,7 @@
 import face_recognition
 import numpy as np
 import joblib
-from sklearn.linear_model import HuberRegressor
+# from sklearn.linear_model import HuberRegressor
 from api.FacePlusPlus import Analyze as FA
 
 

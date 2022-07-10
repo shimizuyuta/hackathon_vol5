@@ -74,7 +74,6 @@ class Analyze:
                 {'bmi': bmi_data['error_message']})
         else:
             self.res.update({"bmi": bmi_data})
-        pass
 
     def __character_analyze(self):
         cc = CC()
