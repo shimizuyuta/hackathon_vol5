@@ -8,12 +8,9 @@ import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from 'axios'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Link from 'next/link'
 import { useRouter } from 'next/router';
+import ReactLoading from 'react-loading';
+
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
@@ -49,6 +46,7 @@ const WebcamCapture = () => {
   const inputId = Math.random();
   const [personData,setPersonData] = useState(null)
   const router = useRouter();  
+  const [loading,setLoading] = useState(false)
 
   // 内・外カメの切り替え
   const switchCamera = useCallback(() => {
@@ -85,6 +83,7 @@ const WebcamCapture = () => {
   const [info, setInfo] = useState(null)
 
   const onSubmit = () => {
+    setLoading(true)
     console.log(url,'Url*+*+++++')
     const header = { headers: {
       'Content-Type': 'multipart/form-data',
@@ -108,10 +107,6 @@ const WebcamCapture = () => {
     data.append('image_file', image_file);
     console.log('これが中身', data.get('file'));
     const postImageUri = 'https://henkeniser.herokuapp.com/analyze'
-    // console.log('url+++++',url)
-    // console.log('url+++++',url[data])
-    // console.log(data,'DDDDDDDDDDD')
-    // axios.post(postImageUri, data, header)
     axios({
       method: "POST",
       url: postImageUri,
@@ -125,6 +120,7 @@ const WebcamCapture = () => {
       console.log(res.data)
       console.log(res.data.age)
       const resJson = JSON.stringify(res.data)
+      setLoading(false)
       router.push({
         pathname:"/result",   //URL
         query: {input :resJson} //検索クエリ
@@ -139,123 +135,96 @@ const WebcamCapture = () => {
   return (
     <>
       {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
-      <Image src={url} alt='写真が表示されます' width="500px" height="300px" objectFit="contain" />
-      {isCaptureable ?
+      {loading?
+        <div>
+          <ReactLoading type="bars" color="#fff" delay={2} height={100} width={100}/>
+        </div>
+      :
       <>
-      <Webcam
-            audio={false}
-            height="720px"
-            width="360px"
-            screenshotFormat="image/jpeg"
-            videoConstraints={{
-              width: 720,
-              height: 360,
-              facingMode: 'user'
-            }}
-            ref={webcamRef}
-          />
-      <Stack spacing={2} direction="row" alignContent="center">
-          <button 
-            onClick={switchCamera} 
-            className={style.button}
-          >
-            <FlipCameraIosIcon/>
-          </button>
-          <button 
-            onClick={startUpCamera} 
-            className={style.button}
-          >
-            カメラを閉じる
-          </button>
-          <button 
-            onClick={captureCamera} 
-            className={style.button}
-          >
-            撮影する
-          </button>
-        
-          {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
-        </Stack>
-        </>:
+
+        <Image src={url} alt='写真が表示されます' width="500px" height="300px" objectFit="contain" />
+        {isCaptureable ?
         <>
-        <Stack spacing={2} direction="row" aligncontents="center">
-          <button onClick={startUpCamera} className={style.button}>カメラを起動する</button>
-          {/* labelのところがなぜか動かない・TODO:buttonのところを調査 */}
-          {/* <label htmlFor={inputId}>
-            <button  className={style.button} >open Folder</button>
-            <input
-              id={inputId}
-              type="file"
-              accept="image/*,.png,.jpg,.jpeg,.gif"
-              style={{display:'none'}}
-              onChange={(e) => handleImage(e)}
+        <Webcam
+              audio={false}
+              height="720px"
+              width="360px"
+              screenshotFormat="image/jpeg"
+              videoConstraints={{
+                width: 720,
+                height: 360,
+                facingMode: 'user'
+              }}
+              ref={webcamRef}
             />
-          </label> */}
-        
-          <label htmlFor={inputId}>
+        <Stack spacing={2} direction="row" aligncontent="center" className={style.stack}>
+            <button 
+              onClick={switchCamera} 
+              className={style.button}
+            >
+              <FlipCameraIosIcon/>
+            </button>
+            <button 
+              onClick={startUpCamera} 
+              className={style.button}
+            >
+              カメラを閉じる
+            </button>
+            <button 
+              onClick={captureCamera} 
+              className={style.button}
+            >
+              撮影する
+            </button>
+          
+            {/* カメラのサイズ・キャプチャーサイズを変更する必要あり */}
+          </Stack>
+          </>:
+          <>
+          <Stack spacing={2} direction="row" aligncontents="center">
+            <button onClick={startUpCamera} className={style.button}>カメラを起動する</button>
+            {/* labelのところがなぜか動かない・TODO:buttonのところを調査 */}
+            {/* <label htmlFor={inputId}>
+              <button  className={style.button} >open Folder</button>
+              <input
+                id={inputId}
+                type="file"
+                accept="image/*,.png,.jpg,.jpeg,.gif"
+                style={{display:'none'}}
+                onChange={(e) => handleImage(e)}
+              />
+            </label> */}
+          
+            <label htmlFor={inputId}>
+              <Button
+                variant="contained"
+                component="span"
+                className={style.button}
+            >
+              画像を追加する
+              </Button>
+              <input
+                id={inputId}
+                type="file"
+                multiple
+                accept="image/*,.png,.jpg,.jpeg,.gif"
+                onChange={(e) => handleImage(e)}
+                style={{ display: "none" }}
+              />
+            </label>
             <Button
-              variant="contained"
-              component="span"
-              className={style.button}
-          >
-            画像を追加する
+                variant="contained"
+                component="span"
+                className={style.button}
+                onClick={onSubmit}
+            >
+              ヘンケナイズする
             </Button>
-            <input
-              id={inputId}
-              type="file"
-              multiple
-              accept="image/*,.png,.jpg,.jpeg,.gif"
-              onChange={(e) => handleImage(e)}
-              style={{ display: "none" }}
-            />
-          </label>
-          <Button
-              variant="contained"
-              component="span"
-              className={style.button}
-              onClick={onSubmit}
-          >
-            ヘンケナイズする
-          </Button>
-          <Link href='/result'>
-            <a>push </a>
-          </Link>
-        </Stack>
-        {personData? 
-          <div>hello</div>
-          :<div>fafa</div>
-          }
-
-        {/* <div>
-          {info.age} 
-        </div>
-        <div>
-          {info.bmi.height} 
-        </div>
-        <div>
-          {info.bmi.weight} 
-        </div> */}
-        
-        {/* <List>
-          <ListItem disablePadding>
-            <ListItemText primary="Age" secondary={info.age} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemText primary="Beauty" secondary={info.age} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemText primary="Height" secondary={info.bmi.height} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemText primary="Weight" secondary={info.bmi.weight} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemText primary="BMI" secondary={info.bmi} />
-          </ListItem>
-        </List> */}
-
-        </>
-      }
+          </Stack>
+  
+          </>
+        }
+      </>}
     </>
   );
 };
