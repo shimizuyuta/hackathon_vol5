@@ -14,17 +14,20 @@ const Result = () => {
             .then(res => {
               setImage([URL.createObjectURL(res.data)])
             })
-    }, [])
+      .catch(err=>{console.log(err);});
+      }, []);
 
     return (
         <div>
-            <img src={image} width="500" />
+            <img src={image} width="500px" height="300px" />
+            <div>
             <Button
               variant="contained"
               component="span"
             >
             他の写真でヘンケナイズしてみる
             </Button>
+            </div>
         </div>
         
     )

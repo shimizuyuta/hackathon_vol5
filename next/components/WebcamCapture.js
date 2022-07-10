@@ -80,7 +80,7 @@ const WebcamCapture = () => {
             }}
             ref={webcamRef}
           />
-      <Stack spacing={2} direction="row" aligncontent="center">
+      <Stack spacing={2} direction="row" alignContent="center">
           <button 
             onClick={switchCamera} 
             className={style.button}
@@ -135,14 +135,14 @@ const WebcamCapture = () => {
               style={{ display: "none" }}
             />
           </label>
-          {/* <Button
+          <Button
               variant="contained"
               component="span"
               className={style.button}
-              onClick={this.onSubmit}
+              // onClick={this.onSubmit}
           >
             ヘンケナイズする
-          </Button> */}
+          </Button>
         </Stack>
 
         </>
