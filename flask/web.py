@@ -8,7 +8,7 @@ from api.analyze import Analyze as AL
 
 load_dotenv()
 app = Flask(__name__)
-app.config.from_envvar('FLASK_CONFIG_FILE')
+# app.config.from_envvar('FLASK_CONFIG_FILE')
 CORS(
     app,
     supports_credentials=True
@@ -21,10 +21,11 @@ def test():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
+    
     request_image = request.files['image_file']
     image_data = request_image.read()
     image_file = {'image_file': (request_image.filename,
-                                 image_data, request_image.mimetype)}
+                                image_data, request_image.mimetype)}
     img = Image.open(BytesIO(image_data))
     img.save('./flask/image.jpg')
     al = AL(image_file)

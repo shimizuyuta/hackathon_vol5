@@ -24,6 +24,16 @@ const videoConstraints = {
   height:100
 };
 
+function _convertToFile (imgData, file) {
+  // ここでバイナリにしている
+  const blob = atob(imgData.replace(/^.*,/, ''));
+  let buffer = new Uint8Array(blob.length);
+  for (let i = 0; i < blob.length; i++) {
+    buffer[i] = blob.charCodeAt(i);
+  }
+  return new File([buffer.buffer], file.name, {type: file.type});
+}
+
 const WebcamCapture = () => {
   const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
   const webcamRef = useRef(null);
@@ -67,27 +77,43 @@ const WebcamCapture = () => {
     console.log(url,'Url*+*+++++')
     const header = { headers: {
       'Content-Type': 'multipart/form-data',
-      "Access-Control-Allow-Origin": "*",
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
       }}
-      const data = new FormData() 
-      data.append('img_file', data)
-      const postImageUri = 'https://henkeniser.herokuapp.com/analyze'
-      console.log('url+++++',url)
-      console.log('url+++++',url[data])
-      console.log(data,'DDDDDDDDDDD')
-      // axios.post(postImageUri, data, header)
-      axios({
-        method: "POST",
-        url: postImageUri,
-        data: data,
-        // config: { headers: header }
-        headers: {"Content-Type": "multipart/form-data"},
-      })
-      .then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log('*********',err.message)
-      })
+    // (1)ファイルをバイナリ化
+    let bin = atob(url.replace(/^.*,/, ''));
+
+    // (2)バイナリデータに変換する
+    let buffer = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i);
+    }
+
+    // (3)Fileオブジェクトを生成
+    let image_file = new File([buffer.buffer], 'test.jpeg', {type: 'multipart/form-data'});
+    console.log('ユーアールエル',url);
+    const imgFile = _convertToFile(url, 'url')
+    console.log('いいいい',imgFile);
+    const data = new FormData();
+    data.append('image_file', image_file);
+    console.log('これが中身', data.get('file'));
+    const postImageUri = 'https://henkeniser.herokuapp.com/analyze'
+    // console.log('url+++++',url)
+    // console.log('url+++++',url[data])
+    // console.log(data,'DDDDDDDDDDD')
+    // axios.post(postImageUri, data, header)
+    axios({
+      method: "POST",
+      url: postImageUri,
+      data: data,
+      config: { headers: header },
+      headers: {"Content-Type": "multipart/form-data", "Access-Control-Allow-Origin": "*"},
+      
+    })
+    .then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log('*********',err.message)
+    })
       
   }
 

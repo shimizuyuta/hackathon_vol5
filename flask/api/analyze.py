@@ -1,5 +1,5 @@
 from api.FacePlusPlus import Analyze as FA
-from api.bmi import BMI
+# from api.bmi import BMI
 from api.character import Character as CC
 from concurrent.futures import ThreadPoolExecutor
 
