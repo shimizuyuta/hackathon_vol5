@@ -7,8 +7,8 @@ from api.FacePlusPlus import Analyze as FA
 
 class BMI:
     def __init__(self):
-        self.weight_model = joblib.load("./flask/api/models/weight_predictor_light.model")
-        self.bmi_model = joblib.load("./flask/api/models/bmi_predictor_light.model")
+        self.weight_model = joblib.load("api/models/weight_predictor_light.model")
+        self.bmi_model = joblib.load("api/models/bmi_predictor_light.model")
 
     def predict(self, image_file):
         fa = FA()
