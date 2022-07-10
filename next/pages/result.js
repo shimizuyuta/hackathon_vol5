@@ -32,8 +32,7 @@ const Result = () => {
     return (
         <div>
           <p>年齢：{userData.age}</p>
-          <p>顔面偏差値：{userData.beauty.female_score}</p>
-          <p>顔面偏差値：{userData.male_score}</p>
+          <p>顔面偏差値：{userData.beauty}</p>
           <p>身長：{userData.bmi.height}</p>
           <p>体重：{userData.bmi.weight}</p>
           <p>性格：{userData.character}</p>
