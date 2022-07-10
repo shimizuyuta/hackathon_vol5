@@ -31,7 +31,7 @@ class BMI:
         bmi = np.exp(self.bmi_model.predict(data)).item()
         height = (weight / bmi) ** 0.5 * 100
 
-        return {"height": height, "weight": weight}
+        return {"height": height, "weight": weight,"bmi":bmi}
 
     def __get_face_encoding(self, image_path):
         picture_of_me = face_recognition.load_image_file(image_path)
