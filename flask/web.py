@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from io import BytesIO
 from PIL import Image
 
 from api.analyze import Analyze as AL
 
-# load_dotenv()
+load_dotenv()
 app = Flask(__name__)
 app.config.from_envvar('FLASK_CONFIG_FILE')
 CORS(
@@ -26,7 +26,7 @@ def analyze():
     image_file = {'image_file': (request_image.filename,
                                  image_data, request_image.mimetype)}
     img = Image.open(BytesIO(image_data))
-    img.save('image.jpg')
+    img.save('flask/image.jpg')
     al = AL(image_file)
     analyze_data = al.analyze()
     return jsonify(analyze_data)
