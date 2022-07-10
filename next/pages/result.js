@@ -8,13 +8,17 @@ const Result = () => {
     const [image, setImage] = useState()
     const router = useRouter();
     const userData = router.query.input;
+    userData = JSON.parse(userData);
+
+    console.log(userData.age);
+    console.log(userData);
     
 
-    useEffect(() => { 
-      // console.log(query)
-      // console.log(router.query)
+    // useEffect(() => { 
+    // console.log(query)
+    // console.log(router.query)
 
-    },[]);
+    // },[]);
 
     // useEffect(() => {
     //     axios.get(
@@ -28,7 +32,34 @@ const Result = () => {
 
     return (
         <div>
-          {userData}
+          {/* {userData} */}
+          {/* <div>
+          {userData.age} 
+          </div>
+          <div>
+            {userData.bmi.height} 
+          </div>
+          <div>
+            {userData.bmi.weight} 
+          </div> */}
+        
+          {/* <List>
+            <ListItem disablePadding>
+              <ListItemText primary="Age" secondary={info.age} />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Beauty" secondary={info.age} />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Height" secondary={info.bmi.height} />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Weight" secondary={info.bmi.weight} />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="BMI" secondary={info.bmi} />
+            </ListItem>
+          </List> */}
         </div>
         
     )
