@@ -8,6 +8,9 @@ import noImageIcon from '../public/noImageIcon2.jpg'
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from 'axios'
+import Link from 'next/link'
+import { useRouter } from 'next/router';
+
 const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
@@ -40,6 +43,8 @@ const WebcamCapture = () => {
   const [isCaptureable,setIsCaptureable] = useState(false); 
   const [url,setUrl] = useState(noImageIcon);
   const inputId = Math.random();
+  const [personData,setPersonData] = useState(null)
+  const router = useRouter();  
 
   // 内・外カメの切り替え
   const switchCamera = useCallback(() => {
@@ -111,7 +116,14 @@ const WebcamCapture = () => {
     })
     .then(res => {
       console.log(res)
-    }).catch(err => {
+      console.log(res.data)
+      const resJson = JSON.stringify(res.data)
+      router.push({
+        pathname:"/result",   //URL
+        query: {input :resJson} //検索クエリ
+      });
+    })
+    .catch(err => {
       console.log('*********',err.message)
     })
       
@@ -198,7 +210,14 @@ const WebcamCapture = () => {
           >
             ヘンケナイズする
           </Button>
+          <Link href='/result'>
+            <a>push </a>
+          </Link>
         </Stack>
+        {personData? 
+          <div>hello</div>
+          :<div>fafa</div>
+          }
 
         </>
       }
