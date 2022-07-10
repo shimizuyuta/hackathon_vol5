@@ -21,7 +21,7 @@ class BMI:
         female = 1 if gender == "Female" else 0
         male = 1 if gender == "Male" else 0
 
-        ret, face_encoding = self.__get_face_encoding("./flask/image.jpg")
+        ret, face_encoding = self.__get_face_encoding("image.jpg")
         if not ret:
             return {'error_message': "Could not find a face in the image."}
 
