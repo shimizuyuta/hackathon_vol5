@@ -7,8 +7,8 @@ from api.FacePlusPlus import Analyze as FA
 
 class BMI:
     def __init__(self):
-        self.weight_model = joblib.load("./flask/api/models/weight_predictor_light.model")
-        self.bmi_model = joblib.load("./flask/api/models/bmi_predictor_light.model")
+        self.weight_model = joblib.load("flask/api/models/weight_predictor_light.model")
+        self.bmi_model = joblib.load("flask/api/models/bmi_predictor_light.model")
 
     def predict(self, image_file):
         fa = FA()
@@ -21,7 +21,7 @@ class BMI:
         female = 1 if gender == "Female" else 0
         male = 1 if gender == "Male" else 0
 
-        ret, face_encoding = self.__get_face_encoding("./flask/image.jpg")
+        ret, face_encoding = self.__get_face_encoding("flask/image.jpg")
         if not ret:
             return {'error_message': "Could not find a face in the image."}
 
@@ -31,7 +31,7 @@ class BMI:
         bmi = np.exp(self.bmi_model.predict(data)).item()
         height = (weight / bmi) ** 0.5 * 100
 
-        return {"height": height, "weight": weight}
+        return {"height": height, "weight": weight,"bmi":bmi}
 
     def __get_face_encoding(self, image_path):
         picture_of_me = face_recognition.load_image_file(image_path)

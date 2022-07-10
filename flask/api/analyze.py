@@ -57,12 +57,18 @@ class Analyze:
         """顔面偏差値の取得
         """
         fa = FA()
-        faces_data = fa.analyze(['beauty'], self.image_file)
-        if "error_message" in faces_data:
-            self.error_messages.update(
-                {'beauty': faces_data['error_message']})
+        face_data = fa.analyze(['beauty','emotion','gender','age'], self.image_file)
+        if "error_message" in face_data:
+            self.error_messages.update({"beauty":face_data['error_message']})
         else:
-            self.res.update({'beauty': faces_data[0]['attributes']['beauty']})
+            face_data_ = face_data[0]['attributes']
+            age = face_data_['age']['value']
+            self.res.update({'age': age})
+            if age == 'Male':
+                self.res.update({'beauty': face_data_['beauty']['male_score']})
+            else:
+                self.res.update({'beauty': face_data_['beauty']['female_score']})
+            self.res.update({'gender': face_data_['gender']['value']})
 
     def __bmi_analyze(self):
         bmi = BMI()
@@ -80,4 +86,4 @@ class Analyze:
             self.error_messages.update(
                 {'character': character_data['error_message']})
         else:
-            self.res.update({'character': character_data})
+            return self.res.update(character_data)

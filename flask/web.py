@@ -27,7 +27,7 @@ def analyze():
     image_file = {'image_file': (request_image.filename,
                                 image_data, request_image.mimetype)}
     img = Image.open(BytesIO(image_data))
-    img.save('./flask/image.jpg')
+    img.save('flask/image.jpg')
     al = AL(image_file)
     analyze_data = al.analyze()
     return jsonify(analyze_data)
