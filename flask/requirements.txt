@@ -4,19 +4,6 @@ flask
 flask-cors
 # python-dotenv
 requests
-<<<<<<< HEAD
-# deepface
-# Pillow
-# cmake
-# wheel
-# dlib==19.24.0
-# numpy==1.21.6
-# scipy==1.4.1
-# pandas==1.3.5
-# face_recognition
-# pycaret
-# opencv-python
-=======
 Pillow
 cmake
 dlib
@@ -24,4 +11,3 @@ numpy
 face_recognition
 joblib
 sklearn
->>>>>>> main

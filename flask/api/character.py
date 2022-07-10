@@ -15,7 +15,7 @@ class Character:
         if "error_message" in self.character:
             return self.character
 
-        return {"emotion": self.character}
+        return {"character": self.character}
 
     def __judge(self):
         if self.emotion == "anger":

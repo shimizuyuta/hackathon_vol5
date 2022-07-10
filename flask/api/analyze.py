@@ -42,8 +42,8 @@ class Analyze:
         executor = ThreadPoolExecutor(max_workers=3)
 
         executor.submit(self.__beauty_analyze())
-        # executor.submit(self.__bmi_analyze())
-        # executor.submit(self.__character_analyze())
+        executor.submit(self.__bmi_analyze())
+        executor.submit(self.__character_analyze())
 
         executor.shutdown()
 
@@ -63,26 +63,18 @@ class Analyze:
             self.error_messages.append(
                 face_data['error_message'])
         else:
-            emotion = "";
-            pre = -1;
-            for k,v in face_data_['emotion'].items():
-                if pre < v:
-                    emotion = k
-                pre = v
-            character = self.return_character(emotion)
-            self.res.update({'character': character})
             self.res.update({'beauty': face_data_['beauty']})
-            self.res.update({'age': face_data_['age']})
-            self.res.update({'gender': face_data_['gender']})
+            self.res.update({'age': face_data_['age']['value']})
+            self.res.update({'gender': face_data_['gender']['value']})
 
     def __bmi_analyze(self):
-        # bmi = BMI()
-        # bmi_data = bmi.predict(self.image_file)
-        # if "error_message" in bmi_data:
-        #     self.error_messages.update(
-        #         {'bmi': bmi_data['error_message']})
-        # else:
-        #     self.res.update({"bmi": bmi_data})
+        bmi = BMI()
+        bmi_data = bmi.predict(self.image_file)
+        if "error_message" in bmi_data:
+            self.error_messages.update(
+                {'bmi': bmi_data['error_message']})
+        else:
+            self.res.update({"bmi": bmi_data})
         pass
 
     def __character_analyze(self):
@@ -92,4 +84,4 @@ class Analyze:
             self.error_messages.update(
                 {'character': character_data['error_message']})
         else:
-            return {"error_message": "Unknown Error."}
+            return self.res.update(character_data)
