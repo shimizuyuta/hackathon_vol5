@@ -1,6 +1,7 @@
 # Henkenyzer
 - 技育CAMPハッカソン vol5　2022年7月
 - チーム：ごきぶり♡
+- 発表スライドは [こちら](https://docs.google.com/presentation/d/1L6NDjNmLb_1HQ6pgF_d9QUDb8eyf3SMS_bmjdp7RhHg/edit?usp=sharing)
 
 ## 概要
 
